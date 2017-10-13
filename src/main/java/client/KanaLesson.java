@@ -7,6 +7,5 @@ public class KanaLesson
 {
   public void onModuleLoad()
   {
-
   }
 }
