@@ -1,14 +1,24 @@
 package client.presentation;
 
-import client.Kana;
+import client.logic.Kana;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.IsWidget;
 
+/**
+ * Logical presentation of an are, which shows random kanas and a text-field for users to input their guesses, which romaji the current kana stands for.
+ */
 public class ExerciseArea extends Presenter<ExerciseArea.View>
 {
-
+  /**
+   * currently shown kana
+   */
   private Kana currentKana;
+
+  /**
+   * all kanas this excercising area alternates between
+   */
+  private Kana[] kanas;
 
   public interface View extends IsWidget
   {
@@ -19,13 +29,13 @@ public class ExerciseArea extends Presenter<ExerciseArea.View>
     String getGuess();
 
     void clearGuess();
-  }
 
-  private Kana[] kanas;
+    void focus();
+  }
 
   public ExerciseArea(Kana... kanas)
   {
-    super(GWT.<View>create(View.class));
+    super(GWT.create(View.class));
     this.kanas = kanas;
 
     getView().setGuessAction(new Command()
@@ -45,13 +55,13 @@ public class ExerciseArea extends Presenter<ExerciseArea.View>
       return;
     }
 
-    String text = getView().getGuess();
-    if (text == null)
+    String guess = getView().getGuess();
+    if(guess == null)
     {
       return;
     }
 
-    if (text.toLowerCase().trim().equals(currentKana.getRomaji()))
+    if(guess.toLowerCase().trim().equals(currentKana.getRomaji()))
     {
       getView().clearGuess();
       nextExercise();
@@ -64,9 +74,11 @@ public class ExerciseArea extends Presenter<ExerciseArea.View>
     super.onShow();
 
     nextExercise();
+
+    getView().focus();
   }
 
-  private void nextExercise()
+  public void nextExercise()
   {
     int kanaCount = kanas.length;
 
@@ -74,7 +86,7 @@ public class ExerciseArea extends Presenter<ExerciseArea.View>
 
     currentKana = kanas[randomKanaIndex];
 
-    getView().showKana(currentKana.getKana());
+    getView().showKana(currentKana.getHiragana());
   }
 
   public void setKanas(Kana[] kanas)

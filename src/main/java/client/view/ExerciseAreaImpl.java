@@ -66,6 +66,12 @@ public class ExerciseAreaImpl
   }
 
   @Override
+  public void focus()
+  {
+    guessBox.setFocus(true);
+  }
+
+  @Override
   public Widget asWidget()
   {
     return panel.asWidget();
