@@ -21,6 +21,7 @@ public class ExerciseAreaImpl
   public ExerciseAreaImpl()
   {
     panel = new VerticalPanel();
+    panel.setStyleName("exerciseArea");
     kanaDisplay = new Label();
     kanaDisplay.setStyleName("kanaDisplay");
 

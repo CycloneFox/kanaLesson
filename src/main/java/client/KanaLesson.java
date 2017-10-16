@@ -14,7 +14,6 @@ public class KanaLesson
   {
     // todo responsive layout?
     VerticalPanel verticalPanel = new VerticalPanel();
-    int clientWidth = RootPanel.getBodyElement().getClientWidth();
     verticalPanel.setWidth("100%");
     ExerciseArea exerciseArea = new ExerciseArea(Kana.ALL_KANA);
     KanaSelectionGrid kanaSelectionGrid = new KanaSelectionGrid();

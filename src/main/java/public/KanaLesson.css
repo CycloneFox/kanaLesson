@@ -10,3 +10,7 @@ body {
   font-size: 48px;
   text-align: center;
 }
+
+.exerciseArea {
+  margin: 0 auto;
+}
