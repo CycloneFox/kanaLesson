@@ -7,20 +7,8 @@
   <groupId>org.fox</groupId>
   <artifactId>kanaLesson</artifactId>
   <version>1.0-SNAPSHOT</version>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 
-    <properties>
+  <properties>
     <gwt.version>2.8.1</gwt.version>
     <guava.version>LATEST</guava.version>
     <guava-gwt.version>LATEST</guava-gwt.version>
@@ -47,7 +35,6 @@
     <dependency>
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
-      <scope>compile</scope>
       <version>${gson.version}</version>
     </dependency>
 
@@ -66,7 +53,7 @@
     <dependency>
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
-      <version>${log4j.version}</version>
+      <version>1.2.15</version>
     </dependency>
   </dependencies>
 

@@ -19,7 +19,6 @@ public abstract class Presenter<V extends IsWidget>
 
     getView().asWidget().addAttachHandler(new AttachEvent.Handler()
     {
-      @Override
       public void onAttachOrDetach(AttachEvent event)
       {
         if (event.isAttached())
@@ -54,7 +53,6 @@ public abstract class Presenter<V extends IsWidget>
     return eventBus;
   }
 
-  @Override
   public Widget asWidget()
   {
     return getView().asWidget();

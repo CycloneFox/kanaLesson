@@ -13,7 +13,6 @@ public class Grid
 {
   private static ProvidesKey<Row> keyProvider = new ProvidesKey<Row>()
   {
-    @Override
     public Object getKey(Row item)
     {
       return item.getKey();

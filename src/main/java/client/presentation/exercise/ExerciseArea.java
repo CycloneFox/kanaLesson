@@ -42,7 +42,6 @@ public class ExerciseArea extends Presenter<ExerciseArea.View>
 
     getView().setGuessAction(new Command()
     {
-      @Override
       public void execute()
       {
         takeGuess();
@@ -51,7 +50,6 @@ public class ExerciseArea extends Presenter<ExerciseArea.View>
 
     getEventBus().addHandler(KanaSelectionEvent.type(), new KanaSelectionEvent.Handler()
     {
-      @Override
       public void onSelectionEvent(Kana[] selectedKana)
       {
         setKanas(selectedKana);

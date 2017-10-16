@@ -5,12 +5,12 @@
  */
 package client.presentation.common;
 
+import com.google.gwt.safehtml.shared.SafeHtml;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.google.gwt.safehtml.shared.SafeHtml;
 
 /**
  * A row for a grid
@@ -24,13 +24,13 @@ public class Row
   public Row()
   {
     this.key = UUID.getUUID("Row");
-    this.keys = new ArrayList<>();
-    this.htmlMap = new HashMap<>();
+    this.keys = new ArrayList<String>();
+    this.htmlMap = new HashMap<String, SafeHtml>();
   }
 
   public List<String> getKeys()
   {
-    return new ArrayList<>(keys);
+    return new ArrayList<String>(keys);
   }
 
   public SafeHtml getHtml(String key)
