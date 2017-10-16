@@ -16,15 +16,19 @@ public abstract class Presenter<V extends IsWidget>
     this.view = view;
     this.eventBus = AppData.get().getEventBus();
 
-    getView().asWidget().addAttachHandler(event ->
+    getView().asWidget().addAttachHandler(new AttachEvent.Handler()
     {
-      if (event.isAttached())
+      @Override
+      public void onAttachOrDetach(AttachEvent event)
       {
-        onShow();
-      }
-      else
-      {
-        onHide();
+        if (event.isAttached())
+        {
+          onShow();
+        }
+        else
+        {
+          onHide();
+        }
       }
     });
   }

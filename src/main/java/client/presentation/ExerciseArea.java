@@ -17,13 +17,15 @@ public class ExerciseArea extends Presenter<ExerciseArea.View>
     void setGuessAction(Command guessAction);
 
     String getGuess();
+
+    void clearGuess();
   }
 
   private Kana[] kanas;
 
   public ExerciseArea(Kana... kanas)
   {
-    super(GWT.create(View.class));
+    super(GWT.<View>create(View.class));
     this.kanas = kanas;
 
     getView().setGuessAction(new Command()
@@ -51,6 +53,7 @@ public class ExerciseArea extends Presenter<ExerciseArea.View>
 
     if (text.toLowerCase().trim().equals(currentKana.getRomaji()))
     {
+      getView().clearGuess();
       nextExercise();
     }
   }

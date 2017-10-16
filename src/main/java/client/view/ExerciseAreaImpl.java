@@ -25,11 +25,15 @@ public class ExerciseAreaImpl
     kanaDisplay.setStyleName("kanaDisplay");
 
     guessBox = new TextBox();
-    guessBox.addKeyUpHandler(event ->
+    guessBox.addKeyUpHandler(new KeyUpHandler()
     {
-      if (guessAction != null)
+      @Override
+      public void onKeyUp(KeyUpEvent event)
       {
-        guessAction.execute();
+        if (guessAction != null)
+        {
+          guessAction.execute();
+        }
       }
     });
 
@@ -53,6 +57,12 @@ public class ExerciseAreaImpl
   public String getGuess()
   {
     return guessBox.getText();
+  }
+
+  @Override
+  public void clearGuess()
+  {
+    guessBox.setValue(null);
   }
 
   @Override

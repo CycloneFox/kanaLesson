@@ -48,9 +48,9 @@ public class Kana
   public static Kana ME = new Kana("め", "me");
   public static Kana MO = new Kana("も", "mo");
 
-  public static Kana YA = new Kana("ざ", "ya");
-  public static Kana YU = new Kana("ず", "yu");
-  public static Kana YO = new Kana("ぞ", "yo");
+  public static Kana YA = new Kana("や", "ya");
+  public static Kana YU = new Kana("ゆ", "yu");
+  public static Kana YO = new Kana("よ", "yo");
 
   public static Kana RA = new Kana("ら", "ra");
   public static Kana RI = new Kana("り", "ri");
@@ -80,8 +80,11 @@ public class Kana
 
   private static Kana[] combine(Kana[]... kanaRows)
   {
-    List<Kana> combination = new ArrayList<>();
-    Arrays.stream(kanaRows).forEach(kanas -> combination.addAll(Arrays.asList(kanas)));
+    List<Kana> combination = new ArrayList<Kana>();
+    for(Kana[] kanaRow : kanaRows)
+    {
+      combination.addAll(Arrays.asList(kanaRow));
+    }
     return combination.toArray(new Kana[combination.size()]);
   }
 
