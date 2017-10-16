@@ -204,6 +204,14 @@ public class Kana
 
   public static Kana[] ALL_KANA = combine(STANDARD_KANA, DAKUTEN_KANA, IYA_KANA, SHCHJ_KANA);
 
+  public static Kana[][][] ALL_KANA_IN_GROUPS = new Kana[][][]{
+    {A_ROW, KA_ROW, SA_ROW, TA_ROW, NA_ROW, HA_ROW, MA_ROW, YA_ROW, RA_ROW, WA_ROW, N_ROW},
+    {GA_ROW, ZA_ROW, DA_ROW, BA_ROW, PA_ROW},
+    {KYA_ROW, NYA_ROW, HYA_ROW, MYA_ROW, RYA_ROW, GYA_ROW, BYA_ROW, PYA_ROW},
+    {SHA_ROW, CHA_ROW, SH_JA_ROW, CH_JA_ROW}
+  };
+
+
   private static Kana[] combine(Kana[]... kanaRows)
   {
     List<Kana> combination = new ArrayList<Kana>();

@@ -1,4 +1,4 @@
-package client.presentation;
+package client.logic;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.SimpleEventBus;

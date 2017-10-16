@@ -1,5 +1,6 @@
-package client.presentation;
+package client.presentation.common;
 
+import client.logic.AppData;
 import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.IsWidget;

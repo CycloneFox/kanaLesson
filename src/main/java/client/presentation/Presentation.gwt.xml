@@ -2,7 +2,11 @@
 <module>
 
   <replace-with class="client.view.ExerciseAreaImpl">
-    <when-type-is class="client.presentation.ExerciseArea.View"/>
+    <when-type-is class="client.presentation.exercise.ExerciseArea.View"/>
+  </replace-with>
+
+  <replace-with class="client.view.KanaSelectionGridImpl">
+    <when-type-is class="client.presentation.KanaSelection.KanaSelectionGrid.View"/>
   </replace-with>
 
 </module>

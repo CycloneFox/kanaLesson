@@ -1,6 +1,8 @@
-package client.presentation;
+package client.presentation.exercise;
 
 import client.logic.Kana;
+import client.presentation.common.Presenter;
+import client.presentation.events.KanaSelectionEvent;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.IsWidget;
@@ -44,6 +46,16 @@ public class ExerciseArea extends Presenter<ExerciseArea.View>
       public void execute()
       {
         takeGuess();
+      }
+    });
+
+    getEventBus().addHandler(KanaSelectionEvent.type(), new KanaSelectionEvent.Handler()
+    {
+      @Override
+      public void onSelectionEvent(Kana[] selectedKana)
+      {
+        setKanas(selectedKana);
+        nextExercise();
       }
     });
   }
