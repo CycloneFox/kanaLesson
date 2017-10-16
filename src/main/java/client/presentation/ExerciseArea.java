@@ -35,7 +35,7 @@ public class ExerciseArea extends Presenter<ExerciseArea.View>
 
   public ExerciseArea(Kana... kanas)
   {
-    super(GWT.create(View.class));
+    super(GWT.<View>create(View.class));
     this.kanas = kanas;
 
     getView().setGuessAction(new Command()
