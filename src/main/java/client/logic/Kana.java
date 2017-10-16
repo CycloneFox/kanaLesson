@@ -89,7 +89,7 @@ public class Kana
 
   public static Kana DA = new Kana("da", "だ", "ダ");
   public static Kana D_JI = new Kana("ji", "ぢ", "ヂ");
-  public static Kana DU = new Kana("du", "づ", "ヅ");
+  public static Kana D_ZU = new Kana("zu", "づ", "ヅ");
   public static Kana DE = new Kana("de", "で", "デ");
   public static Kana DO = new Kana("do", "ど", "ド");
 
@@ -141,21 +141,23 @@ public class Kana
 
   // sh/ch/j-combos
 
-  public static Kana SHA = new Kana("sha", "", "");
-  public static Kana SHU = new Kana("shu", "", "");
-  public static Kana SHO = new Kana("sho", "", "");
+  public static Kana SHA = new Kana("sha", "しゃ", "シャ");
+  public static Kana SHU = new Kana("shu", "しゅ", "シュ");
+  public static Kana SHO = new Kana("sho", "しょ", "ショ");
 
-  public static Kana CHA = new Kana("cha", "", "");
-  public static Kana CHU = new Kana("chu", "", "");
-  public static Kana CHO = new Kana("cho", "", "");
+  public static Kana CHA = new Kana("cha", "ちゃ", "チャ");
+  public static Kana CHU = new Kana("chu", "ちゅ", "チュ");
+  public static Kana CHO = new Kana("cho", "ちょ", "チョ");
 
-  public static Kana SH_JA = new Kana("ja", "", "");
-  public static Kana SH_JU = new Kana("ju", "", "");
-  public static Kana SH_JO = new Kana("jo", "", "");
+  public static Kana SH_JA = new Kana("ja", "じゃ", "ジャ");
+  public static Kana SH_JU = new Kana("ju", "じゅ", "ジュ");
+  public static Kana SH_JO = new Kana("jo", "じょ", "ジョ");
 
-  public static Kana CH_JA = new Kana("ja", "", "");
-  public static Kana CH_JU = new Kana("ju", "", "");
-  public static Kana CH_JO = new Kana("jo", "", "");
+  public static Kana CH_JA = new Kana("ja", "ぢゃ", "ヂャ");
+  public static Kana CH_JU = new Kana("ju", "ぢゅ", "ヂュ");
+  public static Kana CH_JO = new Kana("jo", "ぢょ", "ヂョ");
+
+  // small tsu or in romaji double consonant for faster pronunciation of following syllable
 
   public static final Kana SMALL_TSU = new Kana(DOUBLE_LETTER, "っ", "ッ");
 
@@ -169,10 +171,38 @@ public class Kana
   public static Kana[] YA_ROW = new Kana[]{YA, YU, YO};
   public static Kana[] RA_ROW = new Kana[]{RA, RI, RU, RE, RO};
   public static Kana[] WA_ROW = new Kana[]{WA, WO};
+
   public static Kana[] N_ROW = new Kana[]{N};
 
-  public static Kana[] ALL_KANA = combine(
-      A_ROW, KA_ROW, SA_ROW, TA_ROW, NA_ROW, HA_ROW, MA_ROW, YA_ROW, RA_ROW, WA_ROW, N_ROW);
+  public static Kana[] STANDARD_KANA = combine(A_ROW, KA_ROW, SA_ROW, TA_ROW, NA_ROW, HA_ROW, MA_ROW, YA_ROW, RA_ROW, WA_ROW, N_ROW);
+
+  public static Kana[] GA_ROW = new Kana[]{GA, GI, GU, GE, GO};
+  public static Kana[] ZA_ROW = new Kana[]{ZA, Z_JI, ZU, ZE, ZO};
+  public static Kana[] DA_ROW = new Kana[]{DA, D_JI, D_ZU, DE, DO};
+  public static Kana[] BA_ROW = new Kana[]{BA, BI, BU, BE, BO};
+  public static Kana[] PA_ROW = new Kana[]{PA, PI, PU, PE, PO};
+
+  public static Kana[] DAKUTEN_KANA = combine(GA_ROW, ZA_ROW, DA_ROW, BA_ROW, PA_ROW);
+
+  public static Kana[] KYA_ROW = new Kana[]{KYA, KYU, KYO};
+  public static Kana[] NYA_ROW = new Kana[]{NYA, NYU, NYO};
+  public static Kana[] HYA_ROW = new Kana[]{HYA, HYU, HYO};
+  public static Kana[] MYA_ROW = new Kana[]{MYA, MYU, MYO};
+  public static Kana[] RYA_ROW = new Kana[]{RYA, RYU, RYO};
+  public static Kana[] GYA_ROW = new Kana[]{GYA, GYU, GYO};
+  public static Kana[] BYA_ROW = new Kana[]{BYA, BYU, BYO};
+  public static Kana[] PYA_ROW = new Kana[]{PYA, PYU, PYO};
+
+  public static Kana[] IYA_KANA = combine(KYA_ROW, NYA_ROW, HYA_ROW, MYA_ROW, RYA_ROW, GYA_ROW, BYA_ROW, PYA_ROW);
+
+  public static Kana[] SHA_ROW = new Kana[]{SHA, SHU, SHO};
+  public static Kana[] CHA_ROW = new Kana[]{CHA, CHU, CHO};
+  public static Kana[] SH_JA_ROW = new Kana[]{SH_JA, SH_JU, SH_JO};
+  public static Kana[] CH_JA_ROW = new Kana[]{CH_JA, CH_JU, CH_JO};
+
+  public static Kana[] SHCHJ_KANA = combine(SHA_ROW, CHA_ROW, SH_JA_ROW, CH_JA_ROW);
+
+  public static Kana[] ALL_KANA = combine(STANDARD_KANA, DAKUTEN_KANA, IYA_KANA, SHCHJ_KANA);
 
   private static Kana[] combine(Kana[]... kanaRows)
   {
@@ -247,7 +277,7 @@ public class Kana
 
   public static Collection<String> getAllOf(Writing writing)
   {
-    Collection<String> writings = new ArrayList<>();
+    Collection<String> writings = new ArrayList<String>();
     for(Kana kana : ALL_KANA)
     {
       writings.add(kana.get(writing));
