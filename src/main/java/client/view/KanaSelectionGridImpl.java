@@ -5,30 +5,29 @@
  */
 package client.view;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
 import client.presentation.KanaSelection.KanaSelectionGrid;
-import client.presentation.common.Grid;
-import client.presentation.common.Row;
-import com.google.gwt.user.cellview.client.AbstractCellTable;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.safehtml.shared.SafeHtmlUtils;
+import com.google.gwt.user.client.ui.CheckBox;
+import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Widget;
-import com.google.gwt.view.client.CellPreviewEvent;
 
 public class KanaSelectionGridImpl
   implements KanaSelectionGrid.View
 {
-  private final Grid grid;
+  private final FlexTable grid;
+  private final Map<String, CheckBox> checkBoxLookup;
+  private KanaSelectionGrid.SelectionHandler selectionHandler;
 
   public KanaSelectionGridImpl()
   {
-    this.grid = new Grid();
-    grid.addCellPreviewHandler(new AbstractCellTable.CellTableKeyboardSelectionHandler<Row>(grid){
-      @Override
-      public void onCellPreview(CellPreviewEvent<Row> event)
-      {
-        // todo create click events for grid class
-        boolean isClick = "click".equals(event.getNativeEvent().getType());
-        super.onCellPreview(event);
-      }
-    });
+    this.grid = new FlexTable();
+    this.checkBoxLookup = new HashMap<String, CheckBox>();
   }
 
   @Override
@@ -40,18 +39,39 @@ public class KanaSelectionGridImpl
   @Override
   public void clear()
   {
-//    grid.clear();
+    grid.clear();
   }
 
   @Override
-  public void addCheckbox(int row, int column, String key, String label)
+  public void addCheckbox(int row, int column, final String key, String label)
   {
-//    grid.setHTML(row, column, label); // todo map key, display checkbox etc..
+    CheckBox checkBox = new CheckBox(label == null ? SafeHtmlUtils.EMPTY_SAFE_HTML : SafeHtmlUtils.fromString(label));
+    checkBox.addValueChangeHandler(new ValueChangeHandler<Boolean>()
+    {
+      public void onValueChange(ValueChangeEvent<Boolean> event)
+      {
+        if(selectionHandler != null)
+        {
+          selectionHandler.onSelect(key, event.getValue());
+        }
+      }
+    });
+    checkBoxLookup.put(key, checkBox);
+    grid.setWidget(row, column, checkBox);
   }
 
   @Override
-  public void setRowAndColumnCount(int rows, int columns)
+  public void setSelectionHandler(KanaSelectionGrid.SelectionHandler selectionHandler)
   {
-//    grid.resize(rows, columns);
+    this.selectionHandler = selectionHandler;
+  }
+
+  @Override
+  public void setKanaSelection(Collection<String> selectedKanas)
+  {
+    for(String key : checkBoxLookup.keySet())
+    {
+      checkBoxLookup.get(key).setValue(selectedKanas.contains(key));
+    }
   }
 }

@@ -5,6 +5,11 @@
  */
 package client.presentation.KanaSelection;
 
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
+import client.logic.AppData;
 import client.logic.Kana;
 import client.presentation.common.Presenter;
 import com.google.gwt.core.client.GWT;
@@ -13,6 +18,8 @@ import com.google.gwt.user.client.ui.IsWidget;
 public class KanaSelectionGrid
   extends Presenter<KanaSelectionGrid.View>
 {
+  private static final Collection<String> DEFAULT_SELECTION = Kana.romajiOf(Kana.A_ROW);
+
   public interface View
     extends IsWidget
   {
@@ -20,59 +27,100 @@ public class KanaSelectionGrid
 
     void addCheckbox(int row, int column, String key, String label);
 
-    void setRowAndColumnCount(int rows, int columns);
+    void setSelectionHandler(SelectionHandler selectionHandler);
+
+    void setKanaSelection(Collection<String> selectedKanas);
   }
+
+  public interface SelectionHandler
+  {
+    void onSelect(String key, boolean selected);
+  }
+
+  private final Set<String> kanaStore;
 
   public KanaSelectionGrid()
   {
     super(GWT.<View>create(View.class));
 
-    initialize();
+    this.kanaStore = new HashSet<String>();
+
+    initializeView();
+
+    Collection<String> selectedKanas = AppData.get().getKanaSelection();
+    if(selectedKanas == null)
+    {
+      selectedKanas = DEFAULT_SELECTION;
+    }
+    setKanaSelection(selectedKanas, true);
   }
 
-  private void initialize()
+  private void setKanaSelection(Collection<String> selectedKanas, boolean updateView)
   {
+    AppData.get().setKanaSelection(selectedKanas);
+    kanaStore.clear();
+    kanaStore.addAll(selectedKanas);
+    if(updateView)
+    {
+      getView().setKanaSelection(selectedKanas);
+    }
+  }
+
+  private void initializeView()
+  {
+    // clear possible previous content
     getView().clear();
-    getView().setRowAndColumnCount(getRowCount(), getColumnCount());
+
+    // add grid check boxes for all kans
     int row = 0;
     for(Kana[][] kanaGroup : Kana.ALL_KANA_IN_GROUPS)
     {
       for(Kana[] kanaRow : kanaGroup)
       {
+        getView().addCheckbox(row + 1, 0, createRowKey(kanaRow), ":");
         int column = 0;
         for(Kana kana : kanaRow)
         {
-          getView().addCheckbox(row, column, kana.getRomaji(), kana.getRomaji() + " " + kana.getHiragana()); // todo katakana? other grid?
+          getView().addCheckbox(row + 1, column + 1, kana.getRomaji(), kana.getRomaji() + " " + kana.getHiragana());
           ++column;
         }
         ++row;
       }
     }
-  }
 
-  private static int getRowCount()
-  {
-    int count = 0;
-    for(Kana[][] kanaGroup : Kana.ALL_KANA_IN_GROUPS)
+    // when clicking on a checkbox, select or deselect that
+    getView().setSelectionHandler(new SelectionHandler()
     {
-      count += kanaGroup.length;
-    }
-    return count;
-  }
-
-  private static  int getColumnCount()
-  {
-    int biggestRow = 0;
-    for(Kana[][] kanaGroup : Kana.ALL_KANA_IN_GROUPS)
-    {
-      for(Kana[] kanaRow : kanaGroup)
+      @Override
+      public void onSelect(String key, boolean selected)
       {
-        if(kanaRow.length > biggestRow)
+        if(selected)
         {
-          biggestRow = kanaRow.length;
+          kanaStore.add(key);
         }
+        else
+        {
+          kanaStore.remove(key);
+        }
+        setKanaSelection(kanaStore, false);
       }
+    });
+  }
+
+
+
+  private static String createRowKey(Kana[] kanaRow)
+  {
+    if(kanaRow == null || kanaRow.length == 0)
+    {
+      return "emptyRow";
     }
-    return biggestRow;
+    StringBuilder sb = new StringBuilder();
+    for(Kana kana : kanaRow)
+    {
+      sb.append(kana.getRomaji());
+    }
+    sb.append("Row");
+    return sb.toString();
   }
 }

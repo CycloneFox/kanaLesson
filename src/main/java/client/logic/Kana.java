@@ -298,4 +298,14 @@ public class Kana
   {
     return romaji + "(" + hiragana + "/" + katakana + ")";
   }
+
+  public static Collection<String> romajiOf(Kana... kanas)
+  {
+    Collection<String> romajis = new ArrayList<String>();
+    for(Kana kana : kanas)
+    {
+      romajis.add(kana.getRomaji());
+    }
+    return romajis;
+  }
 }

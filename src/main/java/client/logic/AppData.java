@@ -1,5 +1,7 @@
 package client.logic;
 
+import java.util.Collection;
+
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.SimpleEventBus;
 
@@ -8,6 +10,7 @@ public class AppData
   private static AppData INSTANCE;
 
   private final EventBus eventBus;
+  private Collection<String> kanaSelection;
 
   public AppData()
   {
@@ -26,5 +29,15 @@ public class AppData
   public EventBus getEventBus()
   {
     return eventBus;
+  }
+
+  public Collection<String> getKanaSelection()
+  {
+    return kanaSelection;
+  }
+
+  public void setKanaSelection(Collection<String> kanaSelection)
+  {
+    this.kanaSelection = kanaSelection;
   }
 }
