@@ -1,10 +1,11 @@
 package client.logic;
 
-import java.util.Collection;
-
+import client.presentation.common.Gson;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.user.client.Cookies;
+
+import java.util.Collection;
 
 public class AppData
 {
@@ -24,8 +25,7 @@ public class AppData
     this.allowCookies = isAllowCookies;
     if(isAllowCookies)
     {
-//      this.kanaSelection = Arrays.toString()Cookies.getCookie(KANA_SELECTION);
-      // TODO get kana from cookies!
+      this.kanaSelection = Gson.fromJson(Cookies.getCookie(KANA_SELECTION), Collection.class);
     }
   }
 
@@ -48,7 +48,7 @@ public class AppData
     if(allowCookies)
     {
       Cookies.setCookie(ALLOW_COOKIES, Boolean.toString(true));
-      Cookies.setCookie(KANA_SELECTION, kanaSelection.toString());
+      Cookies.setCookie(KANA_SELECTION, Gson.toJson(kanaSelection));
     }
   }
 

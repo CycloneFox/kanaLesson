@@ -5,15 +5,12 @@
  */
 package client.presentation.common;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+/**
+ * Utility class to use Loggers without having a constant field in each class.
+ */
 public class LOG
 {
-  private static final Map<Class, Logger> LOGGER_LOOKUP = new HashMap<Class, Logger>();
+//  private static final Map<Class, Logger> LOGGER_LOOKUP = new HashMap<Class, Logger>();
 
   public static void warn(Class clazz, String warning)
   {
@@ -22,12 +19,12 @@ public class LOG
 
   private static void warn(Class clazz, String warning, Throwable throwable)
   {
-    Logger logger = LOGGER_LOOKUP.get(clazz);
-    if(logger == null)
-    {
-      logger = LoggerFactory.getLogger(clazz);
-    }
-    logger.warn(warning, throwable);
+//    Logger logger = LOGGER_LOOKUP.get(clazz);
+//    if(logger == null)
+//    {
+//      logger = LoggerFactory.getLogger(clazz);
+//    }
+//    logger.warn(warning, throwable);
   }
 
   public static void error(Class clazz, String warning)
@@ -37,11 +34,11 @@ public class LOG
 
   public static void error(Class clazz, String warning, Throwable throwable)
   {
-    Logger logger = LOGGER_LOOKUP.get(clazz);
-    if(logger == null)
-    {
-      logger = LoggerFactory.getLogger(clazz);
-    }
-    logger.error(warning, throwable);
+//    Logger logger = LOGGER_LOOKUP.get(clazz);
+//    if(logger == null)
+//    {
+//      logger = LoggerFactory.getLogger(clazz);
+//    }
+//    logger.error(warning, throwable);
   }
 }
