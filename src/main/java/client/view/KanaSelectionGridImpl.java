@@ -5,7 +5,6 @@
  */
 package client.view;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -67,11 +66,11 @@ public class KanaSelectionGridImpl
   }
 
   @Override
-  public void setKanaSelection(Collection<String> selectedKanas)
+  public void setCheckBoxes(Map<String, Boolean> checkBoxValues)
   {
-    for(String key : checkBoxLookup.keySet())
+    for(String key : checkBoxValues.keySet())
     {
-      checkBoxLookup.get(key).setValue(selectedKanas.contains(key));
+      checkBoxLookup.get(key).setValue(checkBoxValues.get(key) != null && checkBoxValues.get(key));
     }
   }
 }

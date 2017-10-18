@@ -5,13 +5,19 @@
  */
 package client.presentation.KanaSelection;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import client.logic.AppData;
 import client.logic.Kana;
+import client.logic.Writing;
 import client.presentation.common.Presenter;
+import client.presentation.events.KanaSelectionEvent;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.IsWidget;
 
@@ -29,7 +35,7 @@ public class KanaSelectionGrid
 
     void setSelectionHandler(SelectionHandler selectionHandler);
 
-    void setKanaSelection(Collection<String> selectedKanas);
+    void setCheckBoxes(Map<String, Boolean> checkboxValues);
   }
 
   public interface SelectionHandler
@@ -62,8 +68,37 @@ public class KanaSelectionGrid
     kanaStore.addAll(selectedKanas);
     if(updateView)
     {
-      getView().setKanaSelection(selectedKanas);
+      updateCheckboxes(selectedKanas);
     }
+
+    List<String> kanaKeys = new ArrayList<String>(selectedKanas);
+    Kana[] kanas = new Kana[selectedKanas.size()];
+    for(int i = 0; i < selectedKanas.size(); i++)
+    {
+      kanas[i] = Kana.getKanaBy(kanaKeys.get(i), Writing.ROMAJI);
+    }
+    getEventBus().fireEvent(new KanaSelectionEvent(kanas));
+  }
+
+  private void updateCheckboxes(Collection<String> selectedKanas)
+  {
+    Map<String, Boolean> checkboxValues = new HashMap<String, Boolean>();
+    for(Kana[][] kanaGroup : Kana.ALL_KANA_IN_GROUPS)
+    {
+      for(Kana[] kanaRow : kanaGroup)
+      {
+        boolean allKanaInGroupContained = true;
+        for(Kana kana : kanaRow)
+        {
+          String key = kana.getRomaji();
+          boolean currentKanaContained = selectedKanas.contains(key);
+          allKanaInGroupContained &= currentKanaContained;
+          checkboxValues.put(key, currentKanaContained);
+        }
+        checkboxValues.put(createRowKey(kanaRow), allKanaInGroupContained); // turns row check bx on and off
+      }
+    }
+    getView().setCheckBoxes(checkboxValues);
   }
 
   private void initializeView()
@@ -94,15 +129,39 @@ public class KanaSelectionGrid
       @Override
       public void onSelect(String key, boolean selected)
       {
-        if(selected)
+        Collection<String> selection = new ArrayList<String>();
+        // check for multi selection key
+        for(Kana[][] kanaGroup : Kana.ALL_KANA_IN_GROUPS)
         {
-          kanaStore.add(key);
+          for(Kana[] kanaRow : kanaGroup)
+          {
+            if(createRowKey(kanaRow).equals(key))
+            {
+              for(Kana kana : kanaRow)
+              {
+                selection.add(kana.getRomaji());
+              }
+            }
+          }
         }
-        else
+        // no multi-selection means single selection
+        if(selection.isEmpty())
         {
-          kanaStore.remove(key);
+          selection.add(key);
         }
-        setKanaSelection(kanaStore, false);
+        Set<String> newKanaSelection = new HashSet<String>(kanaStore);
+        for(String selectedKey : selection)
+        {
+          if(selected)
+          {
+            newKanaSelection.add(selectedKey);
+          }
+          else
+          {
+            newKanaSelection.remove(selectedKey);
+          }
+        }
+        setKanaSelection(newKanaSelection, true);
       }
     });
   }

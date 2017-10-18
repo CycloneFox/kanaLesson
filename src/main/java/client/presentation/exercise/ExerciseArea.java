@@ -1,5 +1,9 @@
 package client.presentation.exercise;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import client.logic.Kana;
 import client.presentation.common.Presenter;
 import client.presentation.events.KanaSelectionEvent;
@@ -12,6 +16,11 @@ import com.google.gwt.user.client.ui.IsWidget;
  */
 public class ExerciseArea extends Presenter<ExerciseArea.View>
 {
+  /**
+   * the remaining kana to be solved during this exercise
+   */
+  private final List<Kana> remainingKana;
+
   /**
    * currently shown kana
    */
@@ -39,6 +48,7 @@ public class ExerciseArea extends Presenter<ExerciseArea.View>
   {
     super(GWT.<View>create(View.class));
     this.kanas = kanas;
+    this.remainingKana = new ArrayList<Kana>();
 
     getView().setGuessAction(new Command()
     {
@@ -48,11 +58,12 @@ public class ExerciseArea extends Presenter<ExerciseArea.View>
       }
     });
 
-    getEventBus().addHandler(KanaSelectionEvent.type(), new KanaSelectionEvent.Handler()
+    getEventBus().addHandler(KanaSelectionEvent.TYPE, new KanaSelectionEvent.Handler()
     {
       public void onSelectionEvent(Kana[] selectedKana)
       {
         setKanas(selectedKana);
+        remainingKana.clear();
         nextExercise();
       }
     });
@@ -74,6 +85,7 @@ public class ExerciseArea extends Presenter<ExerciseArea.View>
     if(guess.toLowerCase().trim().equals(currentKana.getRomaji()))
     {
       getView().clearGuess();
+      remainingKana.remove(currentKana);
       nextExercise();
     }
   }
@@ -90,11 +102,14 @@ public class ExerciseArea extends Presenter<ExerciseArea.View>
 
   public void nextExercise()
   {
-    int kanaCount = kanas.length;
+    if(remainingKana.isEmpty())
+    {
+      remainingKana.addAll(Arrays.asList(kanas));
+    }
 
-    int randomKanaIndex = (int) (Math.random() * kanaCount);
+    int randomKanaIndex = (int) (Math.random() * remainingKana.size());
 
-    currentKana = kanas[randomKanaIndex];
+    currentKana = remainingKana.get(randomKanaIndex);
 
     getView().showKana(currentKana.getHiragana());
   }
