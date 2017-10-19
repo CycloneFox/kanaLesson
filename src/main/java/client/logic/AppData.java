@@ -1,11 +1,13 @@
 package client.logic;
 
 import java.util.Collection;
+import java.util.Date;
 
 import client.presentation.common.Utils;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.user.client.Cookies;
+import com.google.gwt.user.datepicker.client.CalendarUtil;
 
 public class AppData
 {
@@ -45,10 +47,13 @@ public class AppData
 
   private void saveAppData()
   {
+    Date nextYear = new Date();
+    CalendarUtil.addMonthsToDate(nextYear, 12);
+
     if(allowCookies)
     {
-      Cookies.setCookie(ALLOW_COOKIES, Boolean.toString(true));
-      Cookies.setCookie(KANA_SELECTION, Utils.toString(kanaSelection));
+      Cookies.setCookie(ALLOW_COOKIES, Boolean.toString(true), nextYear);
+      Cookies.setCookie(KANA_SELECTION, Utils.toString(kanaSelection), nextYear);
     }
     else if(isAllowCookiesSetAllowedInCookies())
     {

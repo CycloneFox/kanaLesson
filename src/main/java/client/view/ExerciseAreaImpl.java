@@ -22,6 +22,7 @@ public class ExerciseAreaImpl
 
   private Command guessAction;
   private final TextBox guessBox;
+  private final Label feedback;
   private boolean displaySelection;
 
   public ExerciseAreaImpl()
@@ -33,6 +34,7 @@ public class ExerciseAreaImpl
 
     guessBox = new TextBox();
     guessBox.setStyleName("guessBox");
+    guessBox.setMaxLength(3);
     guessBox.addKeyUpHandler(new KeyUpHandler()
     {
       @Override
@@ -45,10 +47,13 @@ public class ExerciseAreaImpl
       }
     });
 
-    panel.setWidget(0, 0,kanaDisplay);
+    feedback = new Label();
 
-    panel.setWidget(1, 0, guessBox);
+    panel.setWidget(0, 0,kanaDisplay);
+    panel.setWidget(1, 0, feedback);
     panel.getFlexCellFormatter().setColSpan(1, 0, 2);
+    panel.setWidget(2, 0, guessBox);
+    panel.getFlexCellFormatter().setColSpan(2, 0, 2);
   }
 
   @Override
@@ -94,7 +99,7 @@ public class ExerciseAreaImpl
       {
         if(!displaySelection)
         {
-          panel.getFlexCellFormatter().setColSpan(2, 0, 2);
+          panel.getFlexCellFormatter().setColSpan(3, 0, 2);
           panel.setWidget(2, 0, widget);
           displaySelection = true;
         }
@@ -115,6 +120,12 @@ public class ExerciseAreaImpl
   public void setWidth(int width)
   {
     panel.setWidth(width + "px");
+  }
+
+  @Override
+  public void setFeedBack(String feedback)
+  {
+    this.feedback.setText(feedback);
   }
 
   @Override

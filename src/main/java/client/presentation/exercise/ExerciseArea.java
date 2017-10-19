@@ -49,6 +49,8 @@ public class ExerciseArea extends Presenter<ExerciseArea.View>
     void setSelectionWidget(Widget widget);
 
     void setWidth(int width);
+
+    void setFeedBack(String feedback);
   }
 
   public ExerciseArea(Kana... kanas)
@@ -56,8 +58,9 @@ public class ExerciseArea extends Presenter<ExerciseArea.View>
     super(GWT.<View>create(View.class));
     this.kanas = Arrays.asList(kanas);
     this.remainingKana = new ArrayList<Kana>();
-    getView().setWidth(250);
 
+    getView().setWidth(250);
+    getView().setFeedBack("Try guessing the kana.");
     getView().setGuessAction(new Command()
     {
       public void execute()
@@ -65,6 +68,7 @@ public class ExerciseArea extends Presenter<ExerciseArea.View>
         takeGuess();
       }
     });
+    getView().setSelectionWidget(new KanaSelectionGrid().asWidget());
 
     getEventBus().addHandler(KanaSelectionEvent.TYPE, new KanaSelectionEvent.Handler()
     {
@@ -75,8 +79,6 @@ public class ExerciseArea extends Presenter<ExerciseArea.View>
         nextExercise();
       }
     });
-
-    getView().setSelectionWidget(new KanaSelectionGrid().asWidget());
   }
 
   private void takeGuess()
@@ -97,6 +99,7 @@ public class ExerciseArea extends Presenter<ExerciseArea.View>
       getView().clearGuess();
       remainingKana.remove(currentKana);
       nextExercise();
+      getView().setFeedBack(kanas.size() - remainingKana.size() + "/" + kanas.size());
     }
   }
 
