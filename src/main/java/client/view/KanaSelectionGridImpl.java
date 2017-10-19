@@ -5,14 +5,14 @@
  */
 package client.view;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import client.presentation.KanaSelection.KanaSelectionGrid;
+import client.presentation.exercise.KanaSelectionGrid;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Widget;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class KanaSelectionGridImpl
   implements KanaSelectionGrid.View

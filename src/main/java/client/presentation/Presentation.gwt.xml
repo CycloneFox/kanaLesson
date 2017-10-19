@@ -6,7 +6,7 @@
   </replace-with>
 
   <replace-with class="client.view.KanaSelectionGridImpl">
-    <when-type-is class="client.presentation.KanaSelection.KanaSelectionGrid.View"/>
+    <when-type-is class="client.presentation.exercise.KanaSelectionGrid.View"/>
   </replace-with>
 
   <replace-with class="client.view.SettingsAreaImpl">

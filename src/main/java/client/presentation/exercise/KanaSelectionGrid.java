@@ -3,15 +3,7 @@
  * <p/>
  * This software is the confidential intellectual property of conLeos GmbH; it is copyrighted and licensed.
  */
-package client.presentation.KanaSelection;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+package client.presentation.exercise;
 
 import client.logic.AppData;
 import client.logic.Kana;
@@ -20,6 +12,8 @@ import client.presentation.common.Presenter;
 import client.presentation.events.KanaSelectionEvent;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.IsWidget;
+
+import java.util.*;
 
 public class KanaSelectionGrid
   extends Presenter<KanaSelectionGrid.View>

@@ -6,12 +6,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.ui.FlexTable;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.*;
 import org.jadice.web.gwt.fontawesome.client.FontAwesome;
 
 public class ExerciseAreaImpl
@@ -49,11 +44,11 @@ public class ExerciseAreaImpl
 
     feedback = new Label();
 
+    panel.getFlexCellFormatter().setColSpan(1, 0, 2);
+    panel.getFlexCellFormatter().setColSpan(2, 0, 2);
     panel.setWidget(0, 0,kanaDisplay);
     panel.setWidget(1, 0, feedback);
-    panel.getFlexCellFormatter().setColSpan(1, 0, 2);
     panel.setWidget(2, 0, guessBox);
-    panel.getFlexCellFormatter().setColSpan(2, 0, 2);
   }
 
   @Override
@@ -99,13 +94,14 @@ public class ExerciseAreaImpl
       {
         if(!displaySelection)
         {
-          panel.getFlexCellFormatter().setColSpan(3, 0, 2);
-          panel.setWidget(2, 0, widget);
+          panel.setWidget(1, 0, widget);
+          panel.removeRow(2);
           displaySelection = true;
         }
         else
         {
-          panel.removeRow(2);
+          panel.setWidget(1, 0, feedback);
+          panel.setWidget(2, 0, guessBox);
           displaySelection = false;
         }
       }

@@ -1,18 +1,17 @@
 package client.presentation.exercise;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-
 import client.logic.Kana;
-import client.presentation.KanaSelection.KanaSelectionGrid;
 import client.presentation.common.Presenter;
 import client.presentation.events.KanaSelectionEvent;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Logical presentation of an are, which shows random kanas and a text-field for users to input their guesses, which romaji the current kana stands for.
@@ -68,7 +67,6 @@ public class ExerciseArea extends Presenter<ExerciseArea.View>
         takeGuess();
       }
     });
-    getView().setSelectionWidget(new KanaSelectionGrid().asWidget());
 
     getEventBus().addHandler(KanaSelectionEvent.TYPE, new KanaSelectionEvent.Handler()
     {
@@ -79,6 +77,7 @@ public class ExerciseArea extends Presenter<ExerciseArea.View>
         nextExercise();
       }
     });
+    getView().setSelectionWidget(new KanaSelectionGrid().asWidget());
   }
 
   private void takeGuess()
@@ -99,7 +98,7 @@ public class ExerciseArea extends Presenter<ExerciseArea.View>
       getView().clearGuess();
       remainingKana.remove(currentKana);
       nextExercise();
-      getView().setFeedBack(kanas.size() - remainingKana.size() + "/" + kanas.size());
+      getView().setFeedBack(kanas.size() - remainingKana.size() + 1 + "/" + kanas.size());
     }
   }
 
