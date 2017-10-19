@@ -112,6 +112,12 @@ public class ExerciseAreaImpl
   }
 
   @Override
+  public void setWidth(int width)
+  {
+    panel.setWidth(width + "px");
+  }
+
+  @Override
   public Widget asWidget()
   {
     return panel.asWidget();

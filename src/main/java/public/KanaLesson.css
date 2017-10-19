@@ -27,3 +27,17 @@ body {
 .kanaSelectionGrid td {
   width: 16.666666%;
 }
+
+.simpleCheckBox {
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+}
+
+.simpleCheckBox.simpleCheckBoxChecked {
+  background-color: #CCEECC;
+}
+
+.simpleCheckBox.simpleCheckBoxUnchecked {
+  background-color: #EECCCC;
+}

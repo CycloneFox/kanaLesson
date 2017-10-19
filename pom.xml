@@ -22,7 +22,6 @@
 
   <properties>
     <gwt.version>2.8.1</gwt.version>
-    <guava.version>LATEST</guava.version>
     <log4j.version>LATEST</log4j.version>
 
     <gwt-fontawesome.version>1.0.0</gwt-fontawesome.version>
@@ -95,18 +94,6 @@
       <artifactId>gwt-jackson</artifactId>
       <version>${gwt-jackson.version}</version>
       <scope>provided</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>guava</artifactId>
-      <version>${guava.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>guava-gwt</artifactId>
-      <scope>compile</scope>
     </dependency>
 
     <!--<dependency>-->

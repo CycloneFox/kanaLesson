@@ -11,8 +11,6 @@ import java.util.Map;
 import client.presentation.KanaSelection.KanaSelectionGrid;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
-import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -20,14 +18,14 @@ public class KanaSelectionGridImpl
   implements KanaSelectionGrid.View
 {
   private final FlexTable grid;
-  private final Map<String, CheckBox> checkBoxLookup;
+  private final Map<String, SimpleCheckbox> checkBoxLookup;
   private KanaSelectionGrid.SelectionHandler selectionHandler;
 
   public KanaSelectionGridImpl()
   {
     this.grid = new FlexTable();
     grid.setStyleName("kanaSelectionGrid");
-    this.checkBoxLookup = new HashMap<String, CheckBox>();
+    this.checkBoxLookup = new HashMap<String, SimpleCheckbox>();
   }
 
   @Override
@@ -45,13 +43,7 @@ public class KanaSelectionGridImpl
   @Override
   public void addCheckbox(int row, int column, final String key, String label)
   {
-    SafeHtmlBuilder sb = new SafeHtmlBuilder();
-    if(label != null)
-    {
-      sb.appendHtmlConstant("<br>");
-      sb.appendEscaped(label);
-    }
-    CheckBox checkBox = new CheckBox(sb.toSafeHtml());
+    SimpleCheckbox checkBox = new SimpleCheckbox(label);
     checkBox.addValueChangeHandler(new ValueChangeHandler<Boolean>()
     {
       public void onValueChange(ValueChangeEvent<Boolean> event)
@@ -77,7 +69,7 @@ public class KanaSelectionGridImpl
   {
     for(String key : checkBoxValues.keySet())
     {
-      checkBoxLookup.get(key).setValue(checkBoxValues.get(key) != null && checkBoxValues.get(key));
+      checkBoxLookup.get(key).setValue(checkBoxValues.get(key) != null && checkBoxValues.get(key), true);
     }
   }
 }

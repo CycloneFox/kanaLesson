@@ -47,6 +47,8 @@ public class ExerciseArea extends Presenter<ExerciseArea.View>
     void focus();
 
     void setSelectionWidget(Widget widget);
+
+    void setWidth(int width);
   }
 
   public ExerciseArea(Kana... kanas)
@@ -54,6 +56,7 @@ public class ExerciseArea extends Presenter<ExerciseArea.View>
     super(GWT.<View>create(View.class));
     this.kanas = Arrays.asList(kanas);
     this.remainingKana = new ArrayList<Kana>();
+    getView().setWidth(250);
 
     getView().setGuessAction(new Command()
     {
