@@ -14,3 +14,16 @@ body {
 .exerciseArea {
   margin: 0 auto;
 }
+
+.bars {
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.guessBox {
+  width: 100%;
+}
+
+.kanaSelectionGrid td {
+  width: 16.666666%;
+}

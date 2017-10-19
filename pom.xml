@@ -25,6 +25,7 @@
     <guava.version>LATEST</guava.version>
     <log4j.version>LATEST</log4j.version>
 
+    <gwt-fontawesome.version>1.0.0</gwt-fontawesome.version>
     <activemq.version>5.7.0</activemq.version>
     <commons-codec.version>1.7</commons-codec.version>
     <commons-collections.version>3.2.2</commons-collections.version>
@@ -52,6 +53,12 @@
     </dependency>
 
     <!--commons-->
+
+    <dependency>
+      <groupId>org.jadice.web</groupId>
+      <artifactId>gwt-fontawesome</artifactId>
+      <version>${gwt-fontawesome.version}</version>
+    </dependency>
 
     <dependency>
       <groupId>org.apache.activemq</groupId>

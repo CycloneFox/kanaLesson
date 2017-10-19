@@ -72,6 +72,8 @@ public class ExerciseArea extends Presenter<ExerciseArea.View>
         nextExercise();
       }
     });
+
+    getView().setSelectionWidget(new KanaSelectionGrid().asWidget());
   }
 
   private void takeGuess()

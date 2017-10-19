@@ -1,7 +1,6 @@
 package client;
 
 import client.logic.Kana;
-import client.presentation.KanaSelection.KanaSelectionGrid;
 import client.presentation.exercise.ExerciseArea;
 import client.presentation.settings.SettingsArea;
 import com.google.gwt.core.client.EntryPoint;
@@ -17,10 +16,8 @@ public class KanaLesson
     VerticalPanel verticalPanel = new VerticalPanel();
     verticalPanel.setWidth("100%");
     ExerciseArea exerciseArea = new ExerciseArea(Kana.ALL_KANA);
-    KanaSelectionGrid kanaSelectionGrid = new KanaSelectionGrid();
     verticalPanel.add(new SettingsArea());
     verticalPanel.add(exerciseArea);
-    verticalPanel.add(kanaSelectionGrid);
 
     RootPanel.get().add(verticalPanel);
   }

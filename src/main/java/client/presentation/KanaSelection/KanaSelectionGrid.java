@@ -113,7 +113,7 @@ public class KanaSelectionGrid
     {
       for(Kana[] kanaRow : kanaGroup)
       {
-        getView().addCheckbox(row + 1, 0, createRowKey(kanaRow), ":");
+        getView().addCheckbox(row + 1, 0, createRowKey(kanaRow), null);
         int column = 0;
         for(Kana kana : kanaRow)
         {
