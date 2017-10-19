@@ -6,10 +6,10 @@
 package client.presentation.KanaSelection;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -24,7 +24,7 @@ import com.google.gwt.user.client.ui.IsWidget;
 public class KanaSelectionGrid
   extends Presenter<KanaSelectionGrid.View>
 {
-  private static final Collection<String> DEFAULT_SELECTION = Kana.romajiOf(Kana.A_ROW);
+  public static final Collection<Kana> DEFAULT_SELECTION = Arrays.asList(Kana.A_ROW);
 
   public interface View
     extends IsWidget
@@ -43,41 +43,42 @@ public class KanaSelectionGrid
     void onSelect(String key, boolean selected);
   }
 
-  private final Set<String> kanaStore;
+  private final Set<Kana> kanaStore;
 
   public KanaSelectionGrid()
   {
     super(GWT.<View>create(View.class));
 
-    this.kanaStore = new HashSet<String>();
+    this.kanaStore = new HashSet<Kana>();
 
     initializeView();
 
-    Collection<String> selectedKanas = AppData.get().getKanaSelection();
+    Collection<Kana> selectedKanas = AppData.get().getKanaSelection();
     if(selectedKanas == null)
     {
       selectedKanas = DEFAULT_SELECTION;
     }
-    setKanaSelection(selectedKanas, true);
+    setKanaSelection(selectedKanas);
   }
 
-  private void setKanaSelection(Collection<String> selectedKanas, boolean updateView)
+  private void setKanaSelection(Collection<Kana> selectedKanas)
   {
     AppData.get().setKanaSelection(selectedKanas);
     kanaStore.clear();
     kanaStore.addAll(selectedKanas);
-    if(updateView)
-    {
-      updateCheckboxes(selectedKanas);
-    }
 
-    List<String> kanaKeys = new ArrayList<String>(selectedKanas);
-    Kana[] kanas = new Kana[selectedKanas.size()];
-    for(int i = 0; i < selectedKanas.size(); i++)
+    // update view
+    Collection<String> keys = new ArrayList<String>();
+    for(Kana selectedKana : selectedKanas)
     {
-      kanas[i] = Kana.getKanaBy(kanaKeys.get(i), Writing.ROMAJI);
+      if(selectedKana != null)
+      {
+        keys.add(selectedKana.getRomaji());
+      }
     }
-    getEventBus().fireEvent(new KanaSelectionEvent(kanas));
+    updateCheckboxes(keys);
+
+    getEventBus().fireEvent(new KanaSelectionEvent(selectedKanas));
   }
 
   private void updateCheckboxes(Collection<String> selectedKanas)
@@ -149,19 +150,20 @@ public class KanaSelectionGrid
         {
           selection.add(key);
         }
-        Set<String> newKanaSelection = new HashSet<String>(kanaStore);
+        Set<Kana> newKanaSelection = new HashSet<Kana>(kanaStore);
         for(String selectedKey : selection)
         {
+          Kana kana = Kana.getKanaBy(selectedKey, Writing.ROMAJI);
           if(selected)
           {
-            newKanaSelection.add(selectedKey);
+            newKanaSelection.add(kana);
           }
           else
           {
-            newKanaSelection.remove(selectedKey);
+            newKanaSelection.remove(kana);
           }
         }
-        setKanaSelection(newKanaSelection, true);
+        setKanaSelection(newKanaSelection);
       }
     });
   }

@@ -5,6 +5,8 @@
  */
 package client.presentation.events;
 
+import java.util.Collection;
+
 import client.logic.Kana;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.web.bindery.event.shared.Event;
@@ -13,9 +15,9 @@ public class KanaSelectionEvent
   extends Event<KanaSelectionEvent.Handler>
 {
   public static final KanaSelectionEventType TYPE = new KanaSelectionEventType();
-  private final Kana[] selectedKanas;
+  private final Collection<Kana> selectedKanas;
 
-  public KanaSelectionEvent(Kana[] selectedKanas)
+  public KanaSelectionEvent(Collection<Kana> selectedKanas)
   {
     this.selectedKanas = selectedKanas;
   }
@@ -40,6 +42,6 @@ public class KanaSelectionEvent
   public interface Handler
     extends EventHandler
   {
-    void onSelectionEvent(Kana[] selectedKana);
+    void onSelectionEvent(Collection<Kana> selectedKana);
   }
 }

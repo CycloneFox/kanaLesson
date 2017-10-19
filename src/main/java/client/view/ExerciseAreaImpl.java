@@ -73,6 +73,12 @@ public class ExerciseAreaImpl
   }
 
   @Override
+  public void setSelectionWidget(Widget widget)
+  {
+
+  }
+
+  @Override
   public Widget asWidget()
   {
     return panel.asWidget();
