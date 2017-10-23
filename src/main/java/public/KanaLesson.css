@@ -25,8 +25,9 @@ body {
 
 .simpleCheckBox {
   cursor: pointer;
-  width: 35px;
-  height: 35px;
+  border-radius: 4px 4px 4px 4px;
+  padding: 5px 10px;
+  border: 1px solid;
 }
 
 .simpleCheckBox.simpleCheckBoxChecked {
