@@ -28,6 +28,7 @@ body {
   border-radius: 4px 4px 4px 4px;
   padding: 5px 10px;
   border: 1px solid;
+  min-width: 25px;
 }
 
 .simpleCheckBox.simpleCheckBoxChecked {
