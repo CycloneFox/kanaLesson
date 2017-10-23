@@ -20,5 +20,7 @@ public class KanaLesson
     verticalPanel.add(exerciseArea);
 
     RootPanel.get().add(verticalPanel);
+
+//    RootPanel.get().add(new MainPage().asWidget());
   }
 }

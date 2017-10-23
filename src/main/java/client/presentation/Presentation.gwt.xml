@@ -13,4 +13,8 @@
     <when-type-is class="client.presentation.settings.SettingsArea.View"/>
   </replace-with>
 
+  <replace-with class="client.view.MainPageViewImpl">
+    <when-type-is class="client.presentation.layout.MainPage.View"/>
+  </replace-with>
+
 </module>
