@@ -1,16 +1,11 @@
-/*
- * Copyright (c) 2017 conLeos GmbH. All Rights reserved.
- * <p/>
- * This software is the confidential intellectual property of conLeos GmbH; it is copyrighted and licensed.
- */
 package client.presentation.common;
-
-import com.google.gwt.safehtml.shared.SafeHtml;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.google.gwt.safehtml.shared.SafeHtml;
 
 /**
  * A row for a grid

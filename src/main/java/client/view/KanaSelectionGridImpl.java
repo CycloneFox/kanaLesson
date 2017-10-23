@@ -1,18 +1,13 @@
-/*
- * Copyright (c) 2017 conLeos GmbH. All Rights reserved.
- * <p/>
- * This software is the confidential intellectual property of conLeos GmbH; it is copyrighted and licensed.
- */
 package client.view;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import client.presentation.exercise.KanaSelectionGrid;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Widget;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class KanaSelectionGridImpl
   implements KanaSelectionGrid.View
