@@ -67,4 +67,10 @@ public class KanaSelectionGridImpl
       checkBoxLookup.get(key).setValue(checkBoxValues.get(key) != null && checkBoxValues.get(key), true);
     }
   }
+
+  @Override
+  public void setWidth(int width)
+  {
+    grid.setWidth(width + "px");
+  }
 }

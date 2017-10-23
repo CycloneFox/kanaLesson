@@ -6,9 +6,15 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 
-public abstract class Presenter<V extends IsWidget>
+public abstract class Presenter<V extends Presenter.View>
   implements IsWidget
 {
+  public interface View
+    extends IsWidget
+  {
+    void setWidth(int width);
+  }
+
   private final V view;
   private final EventBus eventBus;
 

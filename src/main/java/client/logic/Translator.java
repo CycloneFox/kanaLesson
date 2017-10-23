@@ -40,8 +40,8 @@ public class Translator
       else
       {
         // we found the kana, we can translate:
-        String translat = currentKana.get(toWriting);
-        translationBuilder.append(translat);
+        String translated = currentKana.get(toWriting);
+        translationBuilder.append(translated);
 
         // increment index by length of found kana
         i += currentKana.get(fromWriting).length();

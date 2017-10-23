@@ -7,7 +7,6 @@ import client.logic.AppData;
 import client.presentation.common.LOG;
 import client.presentation.common.Presenter;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.ui.IsWidget;
 
 public class SettingsArea
   extends Presenter<SettingsArea.View>
@@ -15,7 +14,7 @@ public class SettingsArea
   public static final String ALLOW_COOKIES = "allowCookies";
 
   public interface View
-    extends IsWidget
+    extends Presenter.View
   {
     void showBooleanOptions(List<String> keys);
 

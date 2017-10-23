@@ -1,6 +1,6 @@
 body {
-  background-color: white;
-  color: black;
+  color: #cecece;
+  background-color: #3e3e3e;
   font-family: Arial, sans-serif;
   font-size: small;
   margin: 8px;
@@ -13,11 +13,6 @@ body {
 
 .exerciseArea {
   margin: 0 auto;
-}
-
-.bars {
-  font-size: 28px;
-  cursor: pointer;
 }
 
 .guessBox {
@@ -35,9 +30,14 @@ body {
 }
 
 .simpleCheckBox.simpleCheckBoxChecked {
-  background-color: #CCEECC;
+  background-color: #224029;
 }
 
 .simpleCheckBox.simpleCheckBoxUnchecked {
-  background-color: #EECCCC;
+  background-color: #402627;
+}
+
+.bigButton {
+  font-size: 28px;
+  cursor: pointer;
 }

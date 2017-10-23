@@ -14,7 +14,6 @@ import client.logic.Writing;
 import client.presentation.common.Presenter;
 import client.presentation.events.KanaSelectionEvent;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.ui.IsWidget;
 
 public class KanaSelectionGrid
   extends Presenter<KanaSelectionGrid.View>
@@ -22,7 +21,7 @@ public class KanaSelectionGrid
   public static final Collection<Kana> DEFAULT_SELECTION = Arrays.asList(Kana.A_ROW);
 
   public interface View
-    extends IsWidget
+    extends Presenter.View
   {
     void clear();
 
