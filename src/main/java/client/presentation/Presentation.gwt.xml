@@ -17,4 +17,12 @@
     <when-type-is class="client.presentation.layout.MainPage.View"/>
   </replace-with>
 
+  <replace-with class="client.view.NavigationViewImpl">
+    <when-type-is class="client.presentation.layout.Navigation.View"/>
+  </replace-with>
+
+  <replace-with class="client.view.HomeImpl">
+    <when-type-is class="client.presentation.home.Home.View"/>
+  </replace-with>
+
 </module>

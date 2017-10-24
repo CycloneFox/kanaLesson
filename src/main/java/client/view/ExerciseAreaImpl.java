@@ -53,7 +53,7 @@ public class ExerciseAreaImpl
     feedback = new Label();
 
     panel.getFlexCellFormatter().setColSpan(1, 0, 2);
-    panel.getFlexCellFormatter().setColSpan(2, 0, 2);
+    panel.getFlexCellFormatter().setColSpan(2, 0, 1);
     panel.setWidget(0, 0,kanaDisplay);
     panel.setWidget(1, 0, feedback);
     panel.setWidget(2, 0, guessBox);
@@ -69,7 +69,7 @@ public class ExerciseAreaImpl
     panel.setWidget(1, 0, feedback);
     panel.setWidget(2, 0, guessBox);
     panel.getFlexCellFormatter().setColSpan(1, 0, 2);
-    panel.getFlexCellFormatter().setColSpan(2, 0, 2);
+    panel.getFlexCellFormatter().setColSpan(2, 0, 1);
   }
 
   @Override
@@ -140,12 +140,6 @@ public class ExerciseAreaImpl
   public void focus()
   {
     guessBox.setFocus(true);
-  }
-
-  @Override
-  public void setWidth(int width)
-  {
-    panel.setWidth(width + "px");
   }
 
   @Override

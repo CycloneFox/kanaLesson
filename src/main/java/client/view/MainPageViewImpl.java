@@ -1,101 +1,103 @@
-/*
- * Copyright (c) 2017 conLeos GmbH. All Rights reserved.
- * <p/>
- * This software is the confidential intellectual property of conLeos GmbH; it is copyrighted and licensed.
- */
 package client.view;
 
 import client.presentation.layout.MainPage;
-import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HasVerticalAlignment;
+import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public class MainPageViewImpl
   implements MainPage.View
 {
-  private boolean mobile;
+  private VerticalPanel mainArea;
 
-  private VerticalPanel panel;
-
-  private Widget header;
-  private Widget navigation;
-  private Widget content;
-  private Widget footer;
+  private final Panel headerArea;
+  private final Panel naviArea;
+  private final Panel contentArea;
+  private final Panel footerArea;
 
   public MainPageViewImpl()
   {
-    panel = new VerticalPanel();
-    HTML testHeader = new HTML();
-    testHeader.getElement().setAttribute("background-color", "red");
-    HTML testNavi = new HTML();
-    testNavi.getElement().setAttribute("background-color", "green");
-    HTML testContent = new HTML();
-    testContent.getElement().setAttribute("background-color", "blue");
-    HTML testFooter = new HTML();
-    testFooter.getElement().setAttribute("background-color", "yellow");
-    panel.add(testHeader);
-    panel.add(testNavi);
-    panel.add(testContent);
-    panel.add(testFooter);
-    desktopLayout();
+    mainArea = new VerticalPanel();
+    mainArea.addStyleName("mainArea");
+
+    headerArea = new VerticalPanel();
+    headerArea.addStyleName("headerArea");
+    headerArea.addStyleName("hasPadding");
+    naviArea = new VerticalPanel();
+    naviArea.addStyleName("naviArea");
+    naviArea.addStyleName("hasBorder");
+    contentArea = new VerticalPanel();
+    contentArea.addStyleName("contentArea");
+    contentArea.addStyleName("hasPadding");
+    contentArea.addStyleName("hasBorder");
+    footerArea = new VerticalPanel();
+    footerArea.addStyleName("footerArea");
+    footerArea.addStyleName("hasBorder");
+    footerArea.addStyleName("hasPadding");
+
+    mainArea.setVerticalAlignment(HasVerticalAlignment.ALIGN_TOP);
+
+    mainArea.add(headerArea);
+    mainArea.setCellHeight(headerArea, "50px");
+    mainArea.add(naviArea);
+    mainArea.setCellHeight(naviArea, "50px");
+    mainArea.add(contentArea);
+    mainArea.setVerticalAlignment(HasVerticalAlignment.ALIGN_BOTTOM);
+    mainArea.add(footerArea);
   }
 
   @Override
   public void mobileLayout()
   {
-    mobile = true;
-    layout();
+    mainArea.addStyleName("mobile");
+    headerArea.addStyleName("mobile");
   }
 
   @Override
   public void desktopLayout()
   {
-    mobile = false;
-    layout();
+    mainArea.removeStyleName("mobile");
+    headerArea.removeStyleName("mobile");
   }
 
-  private void layout()
-  {
-
-  }
-
-  // static?
   @Override
   public void setHeader(Widget widget)
   {
-    header = widget;
+    headerArea.clear();
+    headerArea.add(widget);
   }
 
-  // static?
   @Override
   public void setNavigation(Widget widget)
   {
-    navigation = widget;
+    naviArea.clear();
+    naviArea.add(widget);
   }
 
-  // static?
   @Override
   public void setFooter(Widget widget)
   {
-    footer = widget;
+    footerArea.clear();
+    footerArea.add(widget);
   }
 
-  // not static?
+  @Override
+  public void setHeight(int height)
+  {
+    mainArea.setHeight(height + "px");
+  }
+
   @Override
   public void setContent(Widget widget)
   {
-    content = widget;
-  }
-
-  @Override
-  public void setWidth(int width)
-  {
-    panel.setWidth(width + "px");
+    contentArea.clear();
+    contentArea.add(widget);
   }
 
   @Override
   public Widget asWidget()
   {
-    return panel.asWidget();
+    return mainArea.asWidget();
   }
 }

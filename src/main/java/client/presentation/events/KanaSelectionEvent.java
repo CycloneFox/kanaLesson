@@ -18,7 +18,7 @@ public class KanaSelectionEvent
   }
 
   @Override
-  public Type getAssociatedType()
+  public Type<KanaSelectionEvent.Handler> getAssociatedType()
   {
     return TYPE;
   }

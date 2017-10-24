@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import client.presentation.exercise.KanaSelectionGrid;
+import client.view.common.SimpleCheckbox;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.ui.FlexTable;
@@ -66,11 +67,5 @@ public class KanaSelectionGridImpl
     {
       checkBoxLookup.get(key).setValue(checkBoxValues.get(key) != null && checkBoxValues.get(key), true);
     }
-  }
-
-  @Override
-  public void setWidth(int width)
-  {
-    grid.setWidth(width + "px");
   }
 }

@@ -27,7 +27,7 @@ public class SettingsArea
   {
     super(GWT.<View>create(View.class));
 
-    getView().showBooleanOptions(Collections.singletonList(ALLOW_COOKIES)); // todo more options to come?
+    getView().showBooleanOptions(Collections.singletonList(ALLOW_COOKIES));
     getView().setOptionChangeHandler(new OptionChangeCommand<Boolean>()
     {
       @Override

@@ -12,7 +12,6 @@ public abstract class Presenter<V extends Presenter.View>
   public interface View
     extends IsWidget
   {
-    void setWidth(int width);
   }
 
   private final V view;

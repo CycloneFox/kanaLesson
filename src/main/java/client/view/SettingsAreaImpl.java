@@ -70,10 +70,4 @@ public class SettingsAreaImpl
   {
     return panel;
   }
-
-  @Override
-  public void setWidth(int width)
-  {
-    panel.setWidth(width + "px");
-  }
 }

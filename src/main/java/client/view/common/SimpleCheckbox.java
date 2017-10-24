@@ -1,4 +1,4 @@
-package client.view;
+package client.view.common;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -23,6 +23,7 @@ public class SimpleCheckbox
   {
     this.label = label;
     addStyleName("simpleCheckBox");
+    addStyleName("hasBorder");
     setValue(false);
 
     setHtml();

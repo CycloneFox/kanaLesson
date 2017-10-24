@@ -1,10 +1,10 @@
 package client.presentation.layout;
 
 import client.presentation.common.Presenter;
+import client.presentation.common.ResponsivePresenter;
+import client.presentation.events.ChangeContentEvent;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.logical.shared.ResizeEvent;
-import com.google.gwt.event.logical.shared.ResizeHandler;
-import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -57,15 +57,11 @@ import com.google.gwt.user.client.ui.Widget;
  * </pre>
  */
 public class MainPage
-  extends Presenter<MainPage.View>
+  extends ResponsivePresenter<MainPage.View>
 {
   public interface View
-    extends Presenter.View
+    extends ResponsivePresenter.View
   {
-    void mobileLayout();
-
-    void desktopLayout();
-
     void setHeader(Widget widget);
 
     void setNavigation(Widget widget);
@@ -73,31 +69,56 @@ public class MainPage
     void setContent(Widget widget);
 
     void setFooter(Widget widget);
+
+    void setHeight(int height);
   }
+
+  ResizeTimer resizeTimer;
 
   public MainPage()
   {
     super(GWT.<View>create(View.class));
 
-    Window.addResizeHandler(new ResizeHandler()
+    this.resizeTimer = new ResizeTimer();
+
+    getEventBus().addHandler(ChangeContentEvent.TYPE, new ChangeContentEvent.Handler()
     {
       @Override
-      public void onResize(ResizeEvent event)
+      public void onContentChange(Presenter content)
       {
-        if(event.getWidth() < 600)
-        {
-          getView().mobileLayout();
-        }
-        else
-        {
-          getView().desktopLayout();
-        }
+        getView().setContent(content.asWidget());
       }
     });
 
     getView().setHeader(new HTML("Logo here"));
-    getView().setNavigation(new HTML("Navigation here"));
-    getView().setContent(new HTML("Content here"));
+    getView().setNavigation(new Navigation().asWidget());
     getView().setFooter(new HTML("Footer here"));
+
+  }
+
+  @Override
+  protected void onResize(int width, int height)
+  {
+    super.onResize(width, height);
+
+    resizeTimer.setHeight(height); //  constants
+  }
+
+  private class ResizeTimer
+    extends Timer
+  {
+    private int height;
+
+    @Override
+    public void run()
+    {
+      getView().setHeight(height);
+    }
+
+    public void setHeight(int height)
+    {
+      this.height = height;
+      resizeTimer.schedule(GWT.isProdMode() ? 10 : 100); //  constants
+    }
   }
 }
