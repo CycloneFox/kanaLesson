@@ -90,9 +90,11 @@ public class MainPage
       }
     });
 
-    getView().setHeader(new HTML("Logo here"));
+    getView().setHeader(new HTML("Kana Lesson"));
     getView().setNavigation(new Navigation().asWidget());
-    getView().setFooter(new HTML("Footer here"));
+    getView().setFooter(new HTML("All information is implemented with the best of one's knowledge and belief, but without liability and all obligation is "
+                                 + "excluded due to faulty, incomplete or outdated information. <br><br>"
+                                 + "© Copyright 2017 - CycloneFox"));
 
   }
 

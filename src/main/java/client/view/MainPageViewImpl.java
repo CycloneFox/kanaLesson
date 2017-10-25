@@ -33,7 +33,6 @@ public class MainPageViewImpl
     contentArea.addStyleName("hasBorder");
     footerArea = new VerticalPanel();
     footerArea.addStyleName("footerArea");
-    footerArea.addStyleName("hasBorder");
     footerArea.addStyleName("hasPadding");
 
     mainArea.setVerticalAlignment(HasVerticalAlignment.ALIGN_TOP);

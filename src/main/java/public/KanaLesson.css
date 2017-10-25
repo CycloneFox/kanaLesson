@@ -3,7 +3,7 @@ body {
   background-color: #3e3e3e;
   font-family: Arial, sans-serif;
   font-size: small;
-  margin: 0px;
+  margin: 0;
 }
 
 .hasBorder {
@@ -49,10 +49,11 @@ body {
 .bigButton {
   font-size: 28px;
   cursor: pointer;
+  margin: 2px;
 }
 
 .mainArea {
-  background-color: darkslategray;
+  background-color: #3e3e3e;
   margin: 0 auto;
   width: 800px;
   min-height: 100%;
@@ -76,7 +77,7 @@ body {
 }
 
 .naviArea {
-  background-color: darkolivegreen;
+  background-color: #595959;
   width: 100%;
   margin-bottom: 10px;
 }
@@ -88,7 +89,9 @@ body {
 
 .footerArea {
   height: 150px;
-  background-color: darkblue;
+  background-color: #595959;
   margin-top: 20px;
   width: 100%;
+  border: 1px solid;
+  border-bottom: hidden;
 }
