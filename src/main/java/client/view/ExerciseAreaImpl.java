@@ -4,8 +4,6 @@ import client.presentation.common.ButtonHandle;
 import client.presentation.exercise.ExerciseArea;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.KeyUpEvent;
-import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.FlexTable;
@@ -37,16 +35,12 @@ public class ExerciseAreaImpl
 
     guessBox = new TextBox();
     guessBox.setStyleName("guessBox");
+    guessBox.setWidth("99%"); // at 100%, the textbox overflows a little for most browsers, causing horizontal scrolling, etc.
     guessBox.setMaxLength(3);
-    guessBox.addKeyUpHandler(new KeyUpHandler()
-    {
-      @Override
-      public void onKeyUp(KeyUpEvent event)
+    guessBox.addKeyUpHandler(event -> {
+      if (guessAction != null)
       {
-        if (guessAction != null)
-        {
-          guessAction.execute();
-        }
+        guessAction.execute();
       }
     });
 

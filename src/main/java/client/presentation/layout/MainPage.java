@@ -1,5 +1,6 @@
 package client.presentation.layout;
 
+import client.logic.AppData;
 import client.presentation.common.Presenter;
 import client.presentation.common.ResponsivePresenter;
 import client.presentation.events.ChangeContentEvent;
@@ -73,7 +74,7 @@ public class MainPage
     void setHeight(int height);
   }
 
-  ResizeTimer resizeTimer;
+  private ResizeTimer resizeTimer;
 
   public MainPage()
   {
@@ -81,21 +82,18 @@ public class MainPage
 
     this.resizeTimer = new ResizeTimer();
 
-    getEventBus().addHandler(ChangeContentEvent.TYPE, new ChangeContentEvent.Handler()
-    {
-      @Override
-      public void onContentChange(Presenter content)
-      {
-        getView().setContent(content.asWidget());
-      }
-    });
+    getEventBus().addHandler(ChangeContentEvent.TYPE, this::setContent);
 
     getView().setHeader(new HTML("Kana Lesson"));
     getView().setNavigation(new Navigation().asWidget());
-    getView().setFooter(new HTML("All information is implemented with the best of one's knowledge and belief, but without liability and all obligation is "
-                                 + "excluded due to faulty, incomplete or outdated information. <br><br>"
-                                 + "© Copyright 2017 - CycloneFox"));
+    getView().setFooter(new HTML("<small>Created by CycloneFox</small>"));
 
+  }
+
+  private void setContent(Presenter content)
+  {
+    AppData.get().setSelectedPage(content.getClass().getSimpleName());
+    getView().setContent(content.asWidget());
   }
 
   @Override

@@ -13,10 +13,16 @@ public class AppData
 {
   public static final String ALLOW_COOKIES = "allowCookies";
   public static final String KANA_SELECTION = "kanaSelection";
+  public static final String SELECTED_PAGE = "selectedPage";
+
   private static AppData INSTANCE;
 
-  private final EventBus eventBus;
   private boolean allowCookies;
+
+  private String selectedPage;
+
+  private final EventBus eventBus;
+
   private Collection<Kana> kanaSelection;
 
   public AppData()
@@ -54,10 +60,13 @@ public class AppData
     {
       Cookies.setCookie(ALLOW_COOKIES, Boolean.toString(true), nextYear);
       Cookies.setCookie(KANA_SELECTION, Utils.toString(kanaSelection), nextYear);
+      Cookies.setCookie(SELECTED_PAGE, selectedPage, nextYear);
     }
     else if(isAllowCookiesSetAllowedInCookies())
     {
       Cookies.removeCookie(ALLOW_COOKIES);
+      Cookies.removeCookie(KANA_SELECTION);
+      Cookies.removeCookie(SELECTED_PAGE);
     }
   }
 
@@ -68,6 +77,7 @@ public class AppData
     if(isAllowCookies)
     {
       this.kanaSelection = Utils.fromString(Cookies.getCookie(KANA_SELECTION));
+      this.selectedPage = Cookies.getCookie(SELECTED_PAGE);
     }
   }
 
@@ -91,5 +101,16 @@ public class AppData
   {
     this.kanaSelection = kanaSelection;
     saveAppData();
+  }
+
+  public void setSelectedPage(String selectedPage)
+  {
+    this.selectedPage = selectedPage;
+    saveAppData();
+  }
+
+  public String getSelectedPage()
+  {
+    return selectedPage;
   }
 }

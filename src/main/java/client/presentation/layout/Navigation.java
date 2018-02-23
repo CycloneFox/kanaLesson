@@ -1,5 +1,9 @@
 package client.presentation.layout;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import client.logic.AppData;
 import client.logic.Kana;
 import client.presentation.common.Presenter;
 import client.presentation.common.ResponsivePresenter;
@@ -29,7 +33,28 @@ public class Navigation
   {
     super(GWT.<View>create(View.class));
 
-    Command showStartPage = new Command()
+    Map<String, Command> navigationCommands = new HashMap<>();
+    navigationCommands.put(Home.class.getSimpleName(), showStartPage());
+    navigationCommands.put(ExerciseArea.class.getSimpleName(), navigateToExercise());
+    navigationCommands.put(SettingsArea.class.getSimpleName(), navigateToSettings());
+
+    getView().addNavigation("Home", navigationCommands.get(Home.class.getSimpleName()));
+    getView().addNavigation("Exercise", navigationCommands.get(ExerciseArea.class.getSimpleName()));
+    getView().addNavigation("Settings", navigationCommands.get(SettingsArea.class.getSimpleName()));
+
+    String selectedPage = AppData.get().getSelectedPage();
+    Command pageCommand = navigationCommands.get(selectedPage);
+    if(pageCommand == null)
+    {
+      pageCommand = navigationCommands.get(Home.class.getSimpleName()); // by default, show start page
+    }
+
+    pageCommand.execute();
+  }
+
+  private Command showStartPage()
+  {
+    return new Command()
     {
       @Override
       public void execute()
@@ -41,18 +66,11 @@ public class Navigation
         changePage(new ChangeContentEvent(home));
       }
     };
-    getView().addNavigation("Home", showStartPage);
+  }
 
-    getView().addNavigation("Exercise", new Command()
-    {
-      @Override
-      public void execute()
-      {
-        navigateToExercise();
-      }
-    });
-
-    getView().addNavigation("Settings", new Command()
+  private Command navigateToSettings()
+  {
+    return new Command()
     {
       @Override
       public void execute()
@@ -63,20 +81,23 @@ public class Navigation
         }
         changePage(new ChangeContentEvent(settingsArea));
       }
-    });
-
-    showStartPage.execute(); // by default, show start page
-
-    navigateToExercise();
+    };
   }
 
-  public void navigateToExercise()
+  private Command navigateToExercise()
   {
-    if(exerciseArea == null)
+    return new Command()
     {
-      exerciseArea = new ExerciseArea(Kana.ALL_KANA);
-    }
-    changePage(new ChangeContentEvent(exerciseArea));
+      @Override
+      public void execute()
+      {
+        if(exerciseArea == null)
+        {
+          exerciseArea = new ExerciseArea(Kana.ALL_KANA);
+        }
+        changePage(new ChangeContentEvent(exerciseArea));
+      }
+    };
   }
 
   private void changePage(ChangeContentEvent event)

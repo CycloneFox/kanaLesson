@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.Collections;
 
 import client.logic.Kana;
-import client.logic.Writing;
 
 public class Utils
 {
@@ -26,7 +25,7 @@ public class Utils
       {
         if(kana != null)
         {
-          sb.append(kana.getRomaji());
+          sb.append(kana.getKey());
           if(ordered.indexOf(kana) < ordered.size() -1)
           {
             sb.append(SEPARATOR);
@@ -48,11 +47,11 @@ public class Utils
 
     String listContent = from.substring(1, from.length() - 1);
 
-    ArrayList<Kana> kanas = new ArrayList<Kana>();
+    Collection<Kana> kanas = new ArrayList<Kana>();
 
-    for(String romaji : listContent.split(SEPARATOR))
+    for(String key : listContent.split(SEPARATOR))
     {
-      Kana kana = Kana.getKanaBy(romaji, Writing.ROMAJI);
+      Kana kana = Kana.getKanaByKey(key);
       if(kana != null)
       {
         kanas.add(kana);
